@@ -1,6 +1,6 @@
 import { observable, computed, action } from  'mobx'
 
-class Res {
+export class Res {
     @observable name
     @observable id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10) 
     //giving a random short string ID
@@ -12,7 +12,7 @@ class Res {
     }
 }
 
-class RestaurantStore {
+export class RestaurantStore {
     @observable reservations = []
     @observable numTables = 10
     @computed get totalReservations() {
@@ -24,21 +24,22 @@ class RestaurantStore {
         return (this.numTables - counter)
     }
     @computed get restPopulation() {
-        // calculate the number of people in the restaurant now
+        let totalPeople = 0
+        this.reservations.forEach(r => totalPeople += r.numPeople)
+        return totalPeople
     }
     @computed get completedTables() {
-        //calculate the number of tables that have been completed
+        let totalTables = 0
+        return this.reservations.forEach(r => r.completed ? totalTables+= 1 : null)
     }
     @action addRes = (name, numPeople) => {
         this.reservations.push(new Res(name, numPeople))
     }
     @action completeRes = (id) => {
-        //find the reservation and mark it as completed
-        //after you write this function, add some conditional rendering on compelted tables
-        //e.g. strike through our a different color - this will happen on your react, not here.
+        this.reservations.find(r => r.id === id).completed = true
     }
 }
-const HaAchim = new RestaurantStore()
-HaAchim.addRes("Bernard", 4)
+// const HaAchim = new RestaurantStore()
+// HaAchim.addRes("Bernard", 4)
 
-export default HaAchim
+// export default HaAchim
