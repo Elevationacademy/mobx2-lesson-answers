@@ -30,7 +30,8 @@ export class RestaurantStore {
     }
     @computed get completedTables() {
         let totalTables = 0
-        return this.reservations.forEach(r => r.completed ? totalTables+= 1 : null)
+        this.reservations.forEach(r => r.completed ? totalTables+= 1 : null)
+        return totalTables
     }
     @action addRes = (name, numPeople) => {
         this.reservations.push(new Res(name, numPeople))
