@@ -31,11 +31,13 @@ describe("exercise 2", () => {
         expect(wrapper.find("#completedTables").text()).toBe("1")
     })
 
-    // it('The location property should have a default value of "Super Sell"', () => {
-    //     store.addItem("test")
-    //     let test = store.list.find(i => i.name === "test")
-    //     expect(test.location).toBe("Super Sell")
-    // })
+    it('The add reservation button should add a new reservation to the restaurant store using the general store to store inputs', () => {
+        generalStore.handleInput("name", "Georgio")
+        generalStore.handleInput("numPeople", "3")
+        const wrapper = shallow(<Restaurant.wrappedComponent RestaurantStore={restaurantStore} GeneralStore={generalStore}/>)
+        wrapper.find("#addRes").simulate("click")
+        expect(restaurantStore.reservations.find(r => r.name === "Georgio")).toBeTruthy()
+    })
     // it('the location should be rendered next to each item', () => {
     //     const wrapper = render(<App store = {store}/>)
     //     let location = wrapper.find('.location').first().html()

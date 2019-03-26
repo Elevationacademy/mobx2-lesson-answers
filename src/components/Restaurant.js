@@ -6,6 +6,11 @@ import ResInput from './ResInput';
 
 @observer
 class Restaurant extends Component{
+    addRes = () => {
+        let name = this.props.GeneralStore.name
+        let num = this.props.GeneralStore.numPeople
+        this.props.RestaurantStore.addRes(name, num)
+    }
     render () {
         return (
             <div>
@@ -13,8 +18,7 @@ class Restaurant extends Component{
                 <div>There are <span id="restPop">{this.props.RestaurantStore.restPopulation}</span> people in the restaurant</div>
                 <div><span id="completedTables">{this.props.RestaurantStore.completedTables}</span> tables have been served today</div>
                 <ResInput/>
-                <button>Add Reservation</button> 
-                {/* Make the Add Reservation button work */}
+                <button id="addRes"onClick={this.addRes}>Add Reservation</button> 
                 {/* Map reservation data to Reservation components here */}
             </div>
         )
