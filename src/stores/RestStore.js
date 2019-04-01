@@ -25,7 +25,7 @@ export class RestaurantStore {
     }
     @computed get restPopulation() {
         let totalPeople = 0
-        this.reservations.forEach(r => totalPeople += r.numPeople)
+        this.reservations.forEach(r => totalPeople += parseInt(r.numPeople))
         return totalPeople
     }
     @computed get completedTables() {

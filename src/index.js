@@ -3,8 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { Provider } from 'mobx-react'
-import {GeneralStore} from './stores/GeneralStore'
-import {RestaurantStore} from './stores/RestStore'
+import {GeneralStore as generalStore} from './stores/GeneralStore'
+import {RestaurantStore as restaurantStore} from './stores/RestStore'
+
+let GeneralStore = new generalStore()
+let RestaurantStore = new restaurantStore()
 
 const stores = {GeneralStore, 
                 RestaurantStore}

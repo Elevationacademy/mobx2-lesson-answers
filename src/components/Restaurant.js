@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react'
 import ResInput from './ResInput';
+import Reservation from './Reservation';
 
 @inject("GeneralStore", "RestaurantStore")
 
@@ -19,7 +20,9 @@ class Restaurant extends Component{
                 <div><span id="completedTables">{this.props.RestaurantStore.completedTables}</span> tables have been served today</div>
                 <ResInput/>
                 <button id="addRes"onClick={this.addRes}>Add Reservation</button> 
-                {/* Map reservation data to Reservation components here */}
+                <div class = "reservations">
+                    {this.props.RestaurantStore.reservations.map(r => <Reservation res = {r}/>)}
+                </div>
             </div>
         )
     }
