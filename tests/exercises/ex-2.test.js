@@ -1,8 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
-import App from '../../src/App';
 import Restaurant from '../../src/components/Restaurant'
-import { Provider } from 'mobx-react'
 import { render, mount, configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { RestaurantStore, Res} from '../../src/stores/RestStore'

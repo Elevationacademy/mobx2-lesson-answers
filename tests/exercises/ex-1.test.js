@@ -1,6 +1,4 @@
-
 import React from 'react';
-import App from '../../src/App';
 import { render, configure} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { RestaurantStore} from '../../src/stores/RestStore'
