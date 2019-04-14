@@ -1,16 +1,5 @@
 import { observable, computed, action } from  'mobx'
-
-export class Res {
-    @observable name
-    @observable id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10) 
-    //giving a random short string ID
-    @observable numPeople
-    @observable completed = false
-    constructor(name, numPeople) {
-        this.name = name
-        this.numPeople = numPeople
-    }
-}
+import {Reservation} from './ReservationStore'
 
 export class RestaurantStore {
     @observable reservations = []
@@ -34,7 +23,7 @@ export class RestaurantStore {
         return totalTables
     }
     @action addRes = (name, numPeople) => {
-        this.reservations.push(new Res(name, numPeople))
+        this.reservations.push(new Reservation(name, numPeople))
     }
     @action completeRes = (id) => {
         this.reservations.find(r => r.id === id).completed = true

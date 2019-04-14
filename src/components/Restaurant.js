@@ -21,7 +21,7 @@ class Restaurant extends Component{
                 <ResInput/>
                 <button id="addRes"onClick={this.addRes}>Add Reservation</button> 
                 <div class = "reservations">
-                    {this.props.RestaurantStore.reservations.map(r => <Reservation res = {r}/>)}
+                    {this.props.RestaurantStore.reservations.map((r, i) => <Reservation res = {r} key={i}/>)}
                 </div>
             </div>
         )
