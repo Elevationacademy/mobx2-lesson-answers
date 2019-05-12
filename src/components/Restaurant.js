@@ -14,13 +14,13 @@ class Restaurant extends Component{
     }
     render () {
         return (
-            <div>
+            <div className = "rest">
                 <span>You have {this.props.RestaurantStore.openTables} open tables</span>
                 <div>There are <span id="restPop">{this.props.RestaurantStore.restPopulation}</span> people in the restaurant</div>
                 <div><span id="completedTables">{this.props.RestaurantStore.completedTables}</span> tables have been served today</div>
                 <ResInput/>
                 <button id="addRes"onClick={this.addRes}>Add Reservation</button> 
-                <div class = "reservations">
+                <div className = "reservations">
                     {this.props.RestaurantStore.reservations.map((r, i) => <Reservation res = {r} key={i}/>)}
                 </div>
             </div>

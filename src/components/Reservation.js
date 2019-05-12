@@ -12,9 +12,9 @@ class Reservation extends Component{
         let res = this.props.res
         return (
             <div 
-                class = {res.completed ? "conditional":null}>
+                className = {res.completed ? "conditional":null}>
                 {res.name} : {res.numPeople}  
-                <button class = "completeRes"
+                <button className = "completeRes"
                         id = {res.id}
                         onClick = {this.completeRes}>
                         Complete Reservation </button>

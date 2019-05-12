@@ -1,9 +1,9 @@
 import React from 'react';
 import Restaurant from '../../src/components/Restaurant'
-import { configure, shallow } from 'enzyme';
+import { configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {Reservation as Res} from '../../src/stores/ReservationStore'
-import { RestaurantStore } from '../../src/stores/RestaurantStore'
+import { RestaurantStore} from '../../src/stores/RestaurantStore'
 import {GeneralStore} from '../../src/stores/GeneralStore'
 import Reservation from '../../src/components/Reservation';
 
@@ -20,22 +20,19 @@ describe("exercise 2", () => {
         restaurantStore.addRes("Bernard", 4)
         generalStore = new GeneralStore()
     });
-    it('the number of people in the restaurant should be rendered with the id "restPop"', () => {
+    it('the number of people in the restaurant should be rendered', () => {
         const wrapper = shallow(<Restaurant.wrappedComponent RestaurantStore={restaurantStore}/>)
-        expect(wrapper.find('#restPop').length, 
-            "You should have a div with the ID 'restPop'")
-            .toBe(1)
-        expect(wrapper.find("#restPop").text(), 
-            "the restPop div should display the computed restPopulation")
-            .toBe("4")
+        expect(wrapper.text(), 
+            "You should display a div with the computed restPopulation")
+            .toContain("4")
     })
-    it('the number of completed tables should be rendered with the id "completedTables"', () => {
+    it('the number of completed tables should be rendered', () => {
         let bernard = restaurantStore.reservations.find(r => r.name === "Bernard")
         restaurantStore.completeRes(bernard.id)
         const wrapper = shallow(<Restaurant.wrappedComponent RestaurantStore={restaurantStore}/>)
-        expect(wrapper.find("#completedTables").text(), 
-            'the number of completed tables should be rendered with the id "completedTables"')
-            .toBe("1")
+        expect(wrapper.text(), 
+            'the number of completed tables should be rendered on the page')
+            .toContain("1")
     })
 
     it('The add reservation button should add a new reservation to the restaurant store using the general store to store inputs', () => {
@@ -43,7 +40,7 @@ describe("exercise 2", () => {
         generalStore.handleInput("numPeople", "3")
         const wrapper = shallow(<Restaurant.wrappedComponent RestaurantStore={restaurantStore} GeneralStore={generalStore}/>)
         expect(wrapper.find("#addRes").length, 
-            "You should have a button with the id addRes")
+            "You should have a button with the id addRes (don't change code that was given)")
             .toBe(1)
         wrapper.find("#addRes").simulate("click")
         expect(restaurantStore.reservations.find(r => r.name === "Georgio"), 
@@ -54,14 +51,14 @@ describe("exercise 2", () => {
         const wrapper = shallow(<Restaurant.wrappedComponent RestaurantStore={restaurantStore} GeneralStore={generalStore}/>)
         expect(wrapper.find('.reservations').length,
             "you should have a div with the class 'reservations'").toBe(1)
-        expect(wrapper.find('.reservations').children(), 
-            "each reservation should be mapped and rendered as an array of reservation components")
+        expect(wrapper.find(Reservation), 
+            "Your reservations should be mapped and rendered as an array of reservation components")
         .toHaveLength(1)
     })
     it('each reservation should have a "Complete Reservation" button', () => {
         const wrapper = shallow(<Reservation.wrappedComponent RestaurantStore={restaurantStore} res={newRes}/>)
-        expect(wrapper.find('.completeRes').html(), 
-            "each reservation should have a 'Complete Reservation' button with the id 'completeRes'")
-        .toBeTruthy()
+        expect(wrapper.find('button').length, 
+            "each reservation should have a 'Complete Reservation' button")
+        .toBeGreaterThan(0)
     })
 })
