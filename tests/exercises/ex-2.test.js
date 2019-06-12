@@ -21,6 +21,7 @@ describe("exercise 2", () => {
         generalStore = new GeneralStore()
     });
     it('the number of people in the restaurant should be rendered', () => {
+        restaurantStore.reservations.find(r => r.name ==="Bernard").seated = true
         const wrapper = shallow(<Restaurant.wrappedComponent RestaurantStore={restaurantStore}/>)
         expect(wrapper.text(), 
             "You should display a div with the computed restPopulation")
@@ -54,11 +55,5 @@ describe("exercise 2", () => {
         expect(wrapper.find(Reservation), 
             "Your reservations should be mapped and rendered as an array of reservation components")
         .toHaveLength(1)
-    })
-    it('each reservation should have a "Complete Reservation" button', () => {
-        const wrapper = shallow(<Reservation.wrappedComponent RestaurantStore={restaurantStore} res={newRes}/>)
-        expect(wrapper.find('button').length, 
-            "each reservation should have a 'Complete Reservation' button")
-        .toBeGreaterThan(0)
     })
 })

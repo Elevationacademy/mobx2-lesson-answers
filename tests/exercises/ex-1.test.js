@@ -19,6 +19,10 @@ describe("exercise1", () => {
             "restPopulation should be a computed property")
             .toBeTruthy()
         restaurantStore.addRes("Gerald", 2)
+        restaurantStore.addRes("Lerald", 2)
+        let lerald = restaurantStore.reservations.find(r => r.name === "Lerald")
+        lerald.seated = true
+        lerald.completed = false
         expect(restaurantStore.restPopulation, 
             "the restPopulation property should count the total number of people in the restaurant")
             .toBe(restPopulation + 2)
